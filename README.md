@@ -1,88 +1,118 @@
-# Cash Register Lab
+# Object Oriented Programming (OOP) Part 2 - Cash Register Lab
 
-## Learning Goals
+Now that we’ve discussed more about object oriented design philosophies and techniques like decorators we will be looking at building more complex objects. In this case we will be building a cash register object to simulate different functions of a cash register for an e-commerce site. 
 
-- Build a class with instance methods.
-- Call instance methods inside of other instance methods.
-- Use instance methods to track information pertinent to an instance of a class.
-
-***
-
-## Key Vocab
-
-- **Class**: a bundle of data and functionality. Can be copied and modified to
-accomplish a wide variety of programming tasks.
-- **Initialize**: create a working copy of a class using its `__init__`
-method.
-- **Instance**: one specific working copy of a class. It is created when a
-class's `__init__` method is called.
-- **Object**: the more common name for an instance. The two can usually be used
-interchangeably.
-- **Object-Oriented Programming**: programming that is oriented around data
-(made mobile and changeable in **objects**) rather than functionality. Python
-is an object-oriented programming language.
-- **Function**: a series of steps that create, transform, and move data.
-- **Method**: a function that is defined inside of a class.
-- **Magic Method**: a special type of method in Python that starts and ends
-with double underscores. These methods are called on objects under certain
-conditions without needing to use their names explicitly. Also called **dunder
-methods** (for **d**ouble **under**score).
-- **Attribute**: variables that belong to an object.
-- **Property**: attributes that are controlled by methods.
-
-***
-
-## Introduction
-
-We're going to create an Object-Oriented Cash Register that can:
-
-- Add items of varying quantities and prices
-- Calculate discounts
-- Keep track of what's been added to it
-- Void the last transaction
-
-***
+## Tools & Resources
+* [GitHub Repo](https://github.com/learn-co-curriculum/oop-p2-cash-register-lab)
+* [Python Classes](https://docs.python.org/3/tutorial/classes.html)
 
 ## Instructions
 
-**This is a test-driven lab!** You will need to read the spec file and the test
-output very carefully to solve this one.
+### Set Up
 
-Note that a **discount** is calculated as a percentage off of the total cash
-register price (e.g. a discount of 20 means the customer receives 20% off of
-their total price).
+Before we begin coding, let's complete the initial setup for this lesson: 
+* Fork and Clone: For this lesson, you will need the following GitHub Repo:
+  * Go to the provided GitHub repository link.
+  * Fork the repository to your GitHub account.
+  * Clone the forked repository to your local machine.
+* Open and Run File
+  * Open the project in VSCode.
+  * Run npm install to install all necessary dependencies.
 
-**Hint #1:** Keep in mind that to access an attribute or call an instance method
-_inside_ another instance method, we use the `self` keyword to refer to the
-instance on which we are operating. For example:
+### Task 1: Define the Problem
 
-```py
-class Person:
+Build a model for a cash register
+* Build a cash register object
+* Add items
+* Apply discounts
+* Void previous transactions
 
-  def __init__(self, age=0):
-    self.age = age
+### Task 2: Determine the Design
 
-  def birthday(self):
-    self.age += 1
-```
+Cash Register
+* Attributes
+  * discount
+  * total
+  * items
+  * previous_transactions
+* Methods
+  * add_item(item, price, quantity)
+  * apply_discount()
+  * void_last_transaction()
 
-Follow along with the tests in `lib/testing/cash_register_test.py`. Reading
-along with what the tests are looking for can be really helpful!
+### Task 3: Develop, Test, and Refine the Code
 
-Take it one step at a time!
+#### Step 1: Git Feature Branch
 
-**Hint #2:** The `apply_discount()` method requires some knowledge about working
-with integers versus floats in Python. When you get to that method, take a look
-at what return value the tests are expecting and keep in mind that Python
-provides methods for changing an Integer to a Float and vice versa.
+* Create a feature branch for your work using git.
 
-**Hint #3:** The `void_last_transaction()` method will remove the last
-transaction from the total. You'll need to make an additional attribute and keep
-track of that last transaction amount somehow. In what method of the class are
-you working with an individual item?
+#### Step 2: Create a CashRegister class
 
-**Hint #4:** Python handles mutable default values for arguments differently
-than it handles immutable default values. This means that you should usually not
-set default values for lists, dictionaries, and instances of classes. You can
-learn more on this quirk in Python's documentation on [More Control Flow Tools
-](https://docs.python.org/3/tutorial/controlflow.html#default-argument-values).
+* ```__init__```:
+  * discount
+  * Allow for user to input
+  * If no input initialize as 0
+  * Note that discount is a percentage off of the total cash register price (e.g. a discount of 20 means the customer receives 20% off of their total price)
+* ```total```
+  * Initialize as 0
+* ```items```
+  * Initialize as empty array
+* ```previous_transactions```
+  * Initialize as empty array
+
+#### Step 3: Properties
+
+* Discount:
+  * Ensure discount is an integer
+  * Ensure that discount is between 0-100 inclusive
+  * If not print “Not valid discount”
+
+#### Step 4: Methods
+
+* add_item(item, price, quantity)
+  * Add price to total
+  * Add item to the items array
+  * Add an object to the previous transactions with the item, price and quantity.
+* apply_discount()
+  * Apply discount as percentage off from total
+  * Remove the last item of previous_transaction from array
+    * Ensure price reflects correctly
+    * Ensure items reflects correctly
+  * If no transactions in array print “There is no discount to apply.”void_last_transaction()
+
+#### Step 5: Push feature branch and open a PR on GitHub
+
+* Save, commit, and push your code to GitHub.
+* Open a PR on the main branch of your own repo (be sure not to open a PR on the learn-co-curriculum repo).
+
+#### Step 6: Merge to main
+
+* Review the PR and merge your finished code into the main branch.
+
+### Task 4: Document and Maintain
+
+Best Practice documentation steps:
+
+* Add comments to code to explain purpose and logic
+  * Clarify intent / functionality of code to other developers
+  * Add screenshot of completed work included in Markdown in README.
+  * Update README text to reflect the functionality of the application following https://makeareadme.com. 
+* Delete any stale branches on GitHub
+* Remove unnecessary/commented out code
+* If needed, update git ignore to remove sensitive data
+
+## Save your work and push to GitHub
+
+Before you submit your solution, you need to save your progress with git.
+1. Add your changes to the staging area by executing git add .
+2. Create a commit by executing git commit -m "Your commit message"
+3. Push your commits to GitHub by executing git push origin main or git push origin master , depending on the name of your branch (use git branch to check on which branch you are).
+
+## Submission and Grading Criteria
+
+1. Use the rubric in Canvas as a guide for how this lab is graded.
+2. Your submission will be automatically scored in CodeGrade, using the most recent commit. Remember to make sure you have pushed your commit to GitHub before submitting your assignment. 
+3. You can review your submission in CodeGrade and see your final score in your Canvas gradebook.
+4. When you are ready to submit, click the ***Load Lab: Object Oriented Programming (OOP)- Part 2- Cash Register*** button in Canvas to launch CodeGrade.
+  * Click on + Create Submission. Connect your repository for this lab.
+  * For additional information on submitting assignments in CodeGrade: [Getting Started in Canvas](https://help.codegrade.com/for-students/getting-started/getting-started-in-canvas).
